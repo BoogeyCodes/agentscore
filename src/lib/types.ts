@@ -31,4 +31,8 @@ export interface ScoredEvaluation {
   task: string
   runs: RankedRun[]
   winner: RankedRun
+  /** Gap between the top run's overall and the runner-up's (0 with fewer than two runs). */
+  margin: number
+  /** True when the top two runs are within 0.3 of each other — a close call worth re-reading. */
+  isClose: boolean
 }

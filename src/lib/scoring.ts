@@ -20,5 +20,8 @@ export function scoreEvaluation(evaluation: Evaluation): ScoredEvaluation {
     return { ...run, overall, rank, tied: (counts.get(overall) ?? 0) > 1 }
   })
 
-  return { task: evaluation.task, runs, winner: runs[0] }
+  const margin = runs.length >= 2 ? Math.round((runs[0].overall - runs[1].overall) * 10) / 10 : 0
+  const isClose = runs.length >= 2 && margin < 0.3
+
+  return { task: evaluation.task, runs, winner: runs[0], margin, isClose }
 }

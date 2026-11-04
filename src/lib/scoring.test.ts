@@ -47,6 +47,16 @@ describe('scoreEvaluation', () => {
     expect(scored.winner.agent).toBe('agent-alpha')
     expect(scored.winner.overall).toBeGreaterThan(scored.runs[1].overall)
   })
+
+  it('reports the margin to the runner-up and flags close calls', () => {
+    const clear = scoreEvaluation(evalOf(['high', 5], ['low', 2]))
+    expect(clear.margin).toBe(3)
+    expect(clear.isClose).toBe(false)
+
+    const tight = scoreEvaluation(evalOf(['a', 4], ['b', 4]))
+    expect(tight.margin).toBe(0)
+    expect(tight.isClose).toBe(true)
+  })
 })
 
 describe('reports', () => {
