@@ -100,6 +100,12 @@ export default function App() {
             </tbody>
           </table>
         </div>
+        {scored.isClose && (
+          <p className="closecall" role="status">
+            Close call — only <strong>{scored.margin.toFixed(1)}</strong> separates the top two runs.
+            Make sure the rationale explains the call.
+          </p>
+        )}
       </section>
 
       <section className="rationale card">

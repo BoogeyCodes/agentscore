@@ -57,6 +57,10 @@ h2 { font-size: 14px; margin: 0 0 12px; text-transform: uppercase; letter-spacin
 .overall__cell strong { font-size: 18px; font-variant-numeric: tabular-nums; }
 .rankbadge { display: block; font-size: 11px; color: var(--muted); }
 
+.closecall { margin: 14px 0 0; padding: 10px 12px; border-radius: 8px; font-size: 13px;
+  background: color-mix(in srgb, var(--accent, #e0a500) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, #e0a500) 40%, transparent); }
+
 .picker { display: inline-flex; gap: 3px; }
 .picker__btn { width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border); background: var(--panel-2); color: var(--muted); font: inherit; font-size: 12px; cursor: pointer; }
 .picker__btn:hover { border-color: var(--muted); }
