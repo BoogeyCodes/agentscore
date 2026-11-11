@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { RUBRIC, SCALE_MAX, SCALE_MIN } from './lib/rubric'
-import { toJson, toMarkdown } from './lib/report'
+import { toCsv, toJson, toMarkdown } from './lib/report'
 import { SAMPLE_EVALUATION } from './lib/sample'
 import { scoreEvaluation } from './lib/scoring'
 import type { Evaluation, RunInput } from './lib/types'
@@ -124,7 +124,7 @@ export default function App() {
         ))}
       </section>
 
-      <ExportBar markdown={toMarkdown(scored)} json={toJson(scored)} winner={scored.winner.agent} />
+      <ExportBar markdown={toMarkdown(scored)} json={toJson(scored)} csv={toCsv(scored)} winner={scored.winner.agent} />
     </div>
   )
 }
@@ -170,7 +170,7 @@ function ScorePicker({ value, onChange }: { value: number; onChange: (v: number)
   )
 }
 
-function ExportBar({ markdown, json, winner }: { markdown: string; json: string; winner: string }) {
+function ExportBar({ markdown, json, csv, winner }: { markdown: string; json: string; csv: string; winner: string }) {
   const [copied, setCopied] = useState(false)
   const download = (text: string, name: string, type: string) => {
     const blob = new Blob([text], { type })
@@ -200,6 +200,7 @@ function ExportBar({ markdown, json, winner }: { markdown: string; json: string;
         <button className="btn" onClick={copy}>{copied ? 'Copied!' : 'Copy Markdown'}</button>
         <button className="btn" onClick={() => download(markdown, 'evaluation.md', 'text/markdown')}>Download .md</button>
         <button className="btn" onClick={() => download(json, 'evaluation.json', 'application/json')}>Download .json</button>
+        <button className="btn" onClick={() => download(csv, 'evaluation.csv', 'text/csv')}>Download .csv</button>
       </div>
     </section>
   )

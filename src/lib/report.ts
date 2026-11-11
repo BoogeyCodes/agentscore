@@ -28,6 +28,20 @@ export function toMarkdown(scored: ScoredEvaluation): string {
   return lines.join('\n').trimEnd() + '\n'
 }
 
+/** Render the score matrix as CSV: a dimension per row, an agent per column, then overall and rank. */
+export function toCsv(scored: ScoredEvaluation): string {
+  const esc = (v: string | number) => {
+    const s = String(v)
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
+  }
+  const agents = scored.runs.map((r) => r.agent)
+  const rows: (string | number)[][] = [['dimension', 'weight', ...agents]]
+  for (const d of RUBRIC) rows.push([d.name, d.weight, ...scored.runs.map((r) => r.scores[d.key])])
+  rows.push(['overall', '', ...scored.runs.map((r) => r.overall.toFixed(1))])
+  rows.push(['rank', '', ...scored.runs.map((r) => r.rank)])
+  return rows.map((row) => row.map(esc).join(',')).join('\n') + '\n'
+}
+
 export function toJson(scored: ScoredEvaluation): string {
   return JSON.stringify(
     {

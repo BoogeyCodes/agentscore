@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { RUBRIC_KEYS } from './rubric'
-import { toJson, toMarkdown } from './report'
+import { RUBRIC, RUBRIC_KEYS } from './rubric'
+import { toCsv, toJson, toMarkdown } from './report'
 import { SAMPLE_EVALUATION } from './sample'
 import { scoreEvaluation, weightedOverall } from './scoring'
 import type { Evaluation } from './types'
@@ -74,5 +74,14 @@ describe('reports', () => {
     expect(data.winner).toBe('agent-alpha')
     expect(data.runs).toHaveLength(3)
     expect(data.runs[0].rank).toBe(1)
+  })
+
+  it('csv has a header, a row per dimension, and overall/rank rows', () => {
+    const scored = scoreEvaluation(SAMPLE_EVALUATION)
+    const rows = toCsv(scored).trimEnd().split('\n')
+    expect(rows[0]).toBe('dimension,weight,agent-alpha,agent-bravo,agent-charlie')
+    expect(rows[rows.length - 1].startsWith('rank,')).toBe(true)
+    expect(rows[rows.length - 2].startsWith('overall,')).toBe(true)
+    expect(rows).toHaveLength(1 + RUBRIC.length + 2)
   })
 })

@@ -28,7 +28,7 @@ away. It runs entirely in the browser; there is no backend.
 - **Overall & ranking**: a weighted overall (1–5) per run, computed as you rate, with the runs ranked
   and medalled; ties are flagged.
 - **Rationale**: an editable note per run, carried into the report.
-- **Export**: copy the Markdown review to the clipboard, or download it as `.md` or `.json`.
+- **Export**: copy the Markdown review to the clipboard, or download it as `.md`, `.json` or `.csv`.
 
 The app opens on a realistic sample (three agents' runs of "fix the failing login test") so the
 workflow is visible immediately; edit the task, the scores and the rationales to evaluate your own.
