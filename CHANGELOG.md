@@ -5,6 +5,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- `report.toCsv` and a **Download .csv** button — export the score matrix as CSV for
+  spreadsheet analysis.
 - `ScoredEvaluation.margin` and `isClose` — the gap to the runner-up and a flag
   for close calls.
 - A "close call" banner under the ratings matrix that appears when the top two
